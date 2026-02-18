@@ -4,10 +4,10 @@ const { handler } = require("./src/handler");
 
 (async () => {
   const mockEvent = {
-    to: "luizresplandeoliveira@gmail.com",
+    to: "destinatario@gmail.com",
     subject: "Teste Local",
     type: "success", // ou "error"
-    username: "Luiz",
+    username: "Darwin",
     filename: "video.mp4"
   };
 
