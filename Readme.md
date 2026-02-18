@@ -1,7 +1,7 @@
 # 📧 Athena Mail Notification
 
-[![Test Suite](https://github.com/resplandeluiz/email-notification/actions/workflows/tests.yml/badge.svg)](https://github.com/resplandeluiz/email-notification/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/gh/resplandeluiz/email-notification/graph/badge.svg?token=YOUR_TOKEN)](https://codecov.io/gh/resplandeluiz/email-notification)
+[![Test Suite](https://github.com/FIAP-SOAT-2025/athena-notification-service/actions/workflows/tests.yml/badge.svg)](https://github.com/FIAP-SOAT-2025/athena-notification-service/blob/main/.github/workflows/tests.yml)
+[![codecov](https://codecov.io/gh/FIAP-SOAT-2025/athena-notification-service/graph/badge.svg)](https://codecov.io/gh/FIAP-SOAT-2025/athena-notification-service)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 [![Node.js Version](https://img.shields.io/badge/Node.js-18%2B-green)](https://nodejs.org/)
 
@@ -88,8 +88,8 @@
 
 1. **Clone o repositório**
 ```bash
-git clone https://github.com/resplandeluiz/email-notification.git
-cd email-notification
+git clone https://github.com/FIAP-SOAT-2025/athena-notification-service.git
+cd athena-notification-service
 ```
 
 2. **Instale as dependências**
@@ -411,8 +411,8 @@ Este projeto está sob a licença [ISC](https://opensource.org/licenses/ISC).
 
 Tem dúvidas ou encontrou um bug?
 
-- 📝 **Issues**: [Abra uma issue](https://github.com/resplandeluiz/email-notification/issues)
-- 💬 **Discussions**: [Comece uma discussão](https://github.com/resplandeluiz/email-notification/discussions)
+- 📝 **Issues**: [Abra uma issue](https://github.com/FIAP-SOAT-2025/athena-notification-service/issues)
+- 💬 **Discussions**: [Comece uma discussão](https://github.com/FIAP-SOAT-2025/athena-notification-service/discussions)
 - 📧 **Email**: Contacte a equipe Athena
 
 ---
