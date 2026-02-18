@@ -1,5 +1,8 @@
 ## 📧 Athena Mail Notification
 
+[![Test Suite](https://github.com/resplandeluiz/email-notification/actions/workflows/tests.yml/badge.svg)](https://github.com/resplandeluiz/email-notification/actions/workflows/tests.yml)
+[![codecov](https://codecov.io/gh/resplandeluiz/email-notification/graph/badge.svg?token=YOUR_TOKEN)](https://codecov.io/gh/resplandeluiz/email-notification)
+
 Serviço serverless responsável pelo envio de notificações por e-mail utilizando AWS Lambda e Nodemailer.
 
 
@@ -96,6 +99,34 @@ Título
 Caixa de status
 
 Conteúdo contextual
+
+## ✅ Testes
+
+O projeto possui uma suite completa de testes com **100% de cobertura de código**.
+
+### Rodar testes localmente:
+
+```bash
+npm test                # Rodar testes uma vez
+npm run test:watch     # Modo watch (re-roda ao modificar)
+npm run test:coverage  # Gera relatório de cobertura (./coverage)
+```
+
+### CI/CD
+
+O projeto utiliza **GitHub Actions** para rodar os testes automaticamente:
+
+- ✅ Rodam em **todo push** para `main` ou `develop`
+- ✅ Rodam em **todo PR** (Pull Request)
+- ✅ Testam em **Node.js 18.x e 20.x**
+- ✅ Verificam **cobertura mínima de 80%**
+- ✅ Bloqueiam merge caso os testes falhem
+
+**Status CI**: Veja o [workflow](.github/workflows/tests.yml)
+
+### Configurar Branch Protection:
+
+Para garantir que apenas PRs com testes passando sejam mergiados, consulte [.github/BRANCH_PROTECTION.md](.github/BRANCH_PROTECTION.md)
 
 ## 🔒 Segurança
 
