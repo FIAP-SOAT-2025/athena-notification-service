@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1771449313058" clover="3.2.0">
+  <project timestamp="1771449313058" name="All files">
+    <metrics statements="32" coveredstatements="32" conditionals="11" coveredconditionals="11" methods="6" coveredmethods="6" elements="49" coveredelements="49" complexity="0" loc="32" ncloc="32" packages="3" files="4" classes="4"/>
+    <package name="src">
+      <metrics statements="10" coveredstatements="10" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="1"/>
+      <file name="handler.js" path="/Users/resplandeluiz/study/pos/email-notification/src/handler.js">
+        <metrics statements="10" coveredstatements="10" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="18" type="stmt"/>
+        <line num="5" count="18" type="stmt"/>
+        <line num="7" count="18" type="cond" truecount="5" falsecount="0"/>
+        <line num="8" count="7" type="stmt"/>
+        <line num="14" count="11" type="stmt"/>
+        <line num="22" count="7" type="stmt"/>
+        <line num="28" count="4" type="stmt"/>
+        <line num="30" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.modules.notification">
+      <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="notification.service.js" path="/Users/resplandeluiz/study/pos/email-notification/src/modules/notification/notification.service.js">
+        <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="7" count="14" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="11" count="13" type="stmt"/>
+        <line num="13" count="13" type="stmt"/>
+        <line num="15" count="13" type="stmt"/>
+        <line num="23" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="13" coveredstatements="13" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
+      <file name="buildTemplate.js" path="/Users/resplandeluiz/study/pos/email-notification/src/utils/buildTemplate.js">
+        <metrics statements="8" coveredstatements="8" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="48" count="28" type="stmt"/>
+        <line num="49" count="72" type="cond" truecount="2" falsecount="0"/>
+        <line num="54" count="31" type="stmt"/>
+        <line num="56" count="31" type="cond" truecount="2" falsecount="0"/>
+        <line num="57" count="3" type="stmt"/>
+        <line num="60" count="28" type="stmt"/>
+        <line num="68" count="6" type="stmt"/>
+      </file>
+      <file name="loadTemplate.util.js" path="/Users/resplandeluiz/study/pos/email-notification/src/utils/loadTemplate.util.js">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="14" count="5" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
