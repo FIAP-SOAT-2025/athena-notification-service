@@ -1,4 +1,4 @@
-# 📧 Athena Mail Notification
+# 📧 Athena Mail Notifications
 
 [![Test Suite](https://github.com/FIAP-SOAT-2025/athena-notification-service/actions/workflows/tests.yml/badge.svg)](https://github.com/FIAP-SOAT-2025/athena-notification-service/blob/main/.github/workflows/tests.yml)
 [![codecov](https://codecov.io/gh/FIAP-SOAT-2025/athena-notification-service/graph/badge.svg)](https://codecov.io/gh/FIAP-SOAT-2025/athena-notification-service)
