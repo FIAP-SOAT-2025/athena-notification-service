@@ -1,44 +1,128 @@
-name: Deploy Lambda
+name: Notification Service Deploy
 
 on:
   push:
-    branches:
-      - main
-    pull_request:
-      types: [closed]
-      branches:
-        - main
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'apply'
+        type: choice
+        options:
+          - apply
+          - destroy
+
+env:
+  AWS_REGION: us-east-1
+  TF_VERSION: 1.6.0
+  S3_BUCKET_LAMBDA: lambda-code-tc5-g192-v1
+  S3_KEY: notification-service.zip
 
 jobs:
   deploy:
+    name: Deploy Lambda
     runs-on: ubuntu-latest
+    if: github.event.inputs.action != 'destroy'
+    environment: production
+    defaults:
+      run:
+        working-directory: ./terraform
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '18'
+          cache: 'npm'
 
-      - name: Install dependencies
-        run: npm install --production
-
-      - name: Zip project
-        run: |
-          zip -r function.zip . -x "*.git*" -x "node_modules/.cache/*"
-
-      - name: Configure AWS credentials
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
 
-      - name: Deploy to Lambda
+      - name: Install Production Dependencies
+        run: npm ci --omit=dev
+        working-directory: .
+
+      - name: Package Lambda
         run: |
-          aws lambda update-function-code \
-            --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
-            --zip-file fileb://function.zip
+          zip -r ${{ env.S3_KEY }} src/ node_modules/
+        working-directory: .
+
+      - name: Compute source hash
+        id: hash
+        run: |
+          HASH=$(openssl dgst -sha256 -binary ${{ env.S3_KEY }} | openssl base64)
+          echo "value=$HASH" >> $GITHUB_OUTPUT
+        working-directory: .
+
+      - name: Upload to S3
+        run: |
+          aws s3 cp ${{ env.S3_KEY }} s3://${{ env.S3_BUCKET_LAMBDA }}/${{ env.S3_KEY }}
+        working-directory: .
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+        env:
+          TF_VAR_mail_user: ${{ secrets.MAIL_USER }}
+          TF_VAR_mail_pass: ${{ secrets.MAIL_PASS }}
+          TF_VAR_source_code_hash: ${{ steps.hash.outputs.value }}
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan
+        env:
+          TF_VAR_mail_user: ${{ secrets.MAIL_USER }}
+          TF_VAR_mail_pass: ${{ secrets.MAIL_PASS }}
+          TF_VAR_source_code_hash: ${{ steps.hash.outputs.value }}
+
+  destroy:
+    name: Destroy Lambda
+    runs-on: ubuntu-latest
+    if: github.event.inputs.action == 'destroy'
+    environment: production
+    defaults:
+      run:
+        working-directory: ./terraform
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
+        env:
+          TF_VAR_mail_user: ${{ secrets.MAIL_USER }}
+          TF_VAR_mail_pass: ${{ secrets.MAIL_PASS }}
+          TF_VAR_source_code_hash: ""
